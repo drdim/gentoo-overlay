@@ -71,7 +71,10 @@ src_prepare()
 
 	epatch "${FILESDIR}/support-curl-7.31.0.patch"
 
-	export CMAKE_PREFIX_PATH="${D}/usr/lib/hhvm"
+	# https://github.com/facebook/hhvm/issues/1897
+	epatch "${FILESDIR}"/1897_find_imagemagick.patch
+
+        export CMAKE_PREFIX_PATH="${D}/usr/lib/hhvm"
 
 	einfo "Building custom libevent"
 	export EPATCH_SOURCE="${S}/hphp/third_party"
